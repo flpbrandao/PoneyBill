@@ -1,30 +1,35 @@
 package entities;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import entities.enums.Categories;
+
 public class Expense extends Account {
-
-	public Expense() {
-
-	}
-
-	public Expense(String name, Double expenseValue, Integer category, Date date) {
-
-		this.name = name;
-		this.expenseValue = expenseValue;
-		this.category = category;
-		this.date = date;
-		// this.comment = comment;
-	}
 
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 	private String name;
 	private Double expenseValue;
-	private Integer category;
 	private Date date;
-	// private String comment;
+	private Categories category;
+
+	public Expense() {
+
+	}
+
+	public Expense(String name, Double expenseValue, Categories category, Date date) {
+
+		this.name = name;
+		this.expenseValue = expenseValue;
+		this.category = category;
+		this.date = date;
+	
+	}
 
 	public String getName() {
 		return name;
@@ -42,11 +47,11 @@ public class Expense extends Account {
 		this.expenseValue = expenseValue;
 	}
 
-	public Integer getCategory() {
+	public Categories getCategory() {
 		return category;
 	}
 
-	public void setCategory(Integer category) {
+	public void setCategory(Categories category) {
 		this.category = category;
 	}
 
@@ -54,28 +59,29 @@ public class Expense extends Account {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-		// }
-
-//	public String getComment() {
-		// return comment;
-//	}
-
-//	public void setComment(String comment) {
-//		this.comment = comment;
+	public void setDate(Date date) throws ParseException {
+		this.date = sdf.parse("dd/MM/yyyy");
 	}
+	
+	public void addToAccountMovement(String name, double expenseValue, Categories category, Date date) {
+		String path = ".\\src\\files\\data.txt";
 
-	public void addToAccountMovement(double value) {
-		super.addBalance(value);
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path,true))) {
+
+			bw.write(name + "," + expenseValue + "," + category + "," + (date) + "\n");
+			
+		} catch (IOException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+
 	}
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Name: " + this.name + "\n");
-		sb.append("Value: " + this.getExpenseValue()+ "\n");
-		sb.append("Category: " + this.getCategory()+ "\n");
-		sb.append("Date: " + this.sdf.format(this.getDate())+ "\n");
+		sb.append("Value: " + this.getExpenseValue() + "\n");
+		sb.append("Category: " + this.getCategory() + "\n");
+		sb.append("Date: " + this.sdf.format(this.getDate()) + "\n");
 
 		return sb.toString();
 	}

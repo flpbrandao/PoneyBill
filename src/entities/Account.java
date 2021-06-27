@@ -1,40 +1,27 @@
 package entities;
 
 public class Account {
-	
-	private Double balance;
-	private String name;
-	
-	public Account () {
-		
+
+	private Double accountBalance;
+	private String accountName;
+
+	public Account() {
+
 	}
 
-	public Account(Double balance, String name) {
-		this.balance = balance;
-		this.name = name;
+	public Double getAccountBalance() {
+		return accountBalance;
 	}
 
-	public String getName() {
-		return name;
+	public void setAccountBalance(Double accountBalance) {
+		this.accountBalance = accountBalance;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getAccountName() {
+		return accountName;
 	}
 
-	public Double getBalance() {
-		return balance;
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
-	
-	public void addBalance (double value) {
-		this.balance += value;
-	}
-	public void removeBalance(double value) {
-		this.balance -= value;
-	}
-	public void addToMovement() {
-		//This will append data to a .txt file
-	}
-
-
 }

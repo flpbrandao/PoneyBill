@@ -7,16 +7,17 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Expense;
+import entities.enums.Categories;
 
 public class program {
 
 	public static void main(String[] args) throws ParseException {
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		
+
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-		
+
 		Date date = new Date();
 		date = sdf.parse("28/09/1990");
 		System.out.println("Escolha a operação: 1 - Receita / 2 - Despesa");
@@ -33,25 +34,43 @@ public class program {
 		System.out.println("3 - Alcools");
 		System.out.println("4 - Saude ");
 		System.out.println("5 - Dividas ");
-		int category = sc.nextInt();
+		int categoryInt = sc.nextInt();
+		String category = null;
 		
-		Expense exp = new Expense (name, value,category,date);
+		switch (categoryInt) {
+		case 1: {
+			category = "CASA";
+			break;
+
+		}
+		case 2: {
+			category = "LANCHES";
+			break;
+		}
+		case 3: {
+			category = "ALCOOLS";
+			break;
+		}
+		case 4: {
+			category = "SAUDE";
+			break;
+
+		}
+		case 5: {
+			category = "DIVIDAS";
+			break;
+		}
+		default:
+			category = "";
+
+		}
+
+		Expense exp = new Expense(name, value, Categories.valueOf(category), date);
+		exp.addToAccountMovement(name, value, Categories.valueOf(category), date);
 		System.out.println(exp);
 		
-		
 
-		
-		
-
-		
-		
-		
-		
-		
-		
-
-	
 	}
 
+	
 }
- 
