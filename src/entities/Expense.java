@@ -11,7 +11,7 @@ import entities.enums.Categories;
 
 public class Expense extends Account {
 
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	private String name;
 	private Double expenseValue;
@@ -68,13 +68,14 @@ public class Expense extends Account {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path,true))) {
 
-			bw.write(name + "," + expenseValue + "," + category + "," + (date) + "\n");
+			bw.write(name + "," + expenseValue + "," + category + "," + (sdf.format(date)) + "\n");
 			
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
 
 	}
+	
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

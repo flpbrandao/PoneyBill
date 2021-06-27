@@ -1,17 +1,17 @@
 package application;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-import entities.Expense;
-import entities.enums.Categories;
+import entities.Account;
 
 public class program {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException, IOException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -19,7 +19,8 @@ public class program {
 		Scanner sc = new Scanner(System.in);
 
 		Date date = new Date();
-		date = sdf.parse("28/09/1990");
+		System.out.println(date);
+
 		System.out.println("Escolha a operação: 1 - Receita / 2 - Despesa");
 		double op = sc.nextInt();
 		System.out.println("Digite o nome da despesa: ");
@@ -36,7 +37,7 @@ public class program {
 		System.out.println("5 - Dividas ");
 		int categoryInt = sc.nextInt();
 		String category = null;
-		
+
 		switch (categoryInt) {
 		case 1: {
 			category = "CASA";
@@ -65,12 +66,12 @@ public class program {
 
 		}
 
-		Expense exp = new Expense(name, value, Categories.valueOf(category), date);
-		exp.addToAccountMovement(name, value, Categories.valueOf(category), date);
-		System.out.println(exp);
-		
+		// Expense exp = new Expense(name, value, Categories.valueOf(category), date);
+		// exp.addToAccountMovement(name, value, Categories.valueOf(category), date);
+		// System.out.println(exp);
+		Account acc = new Account();
+		acc.readAccountOperations();
 
 	}
 
-	
 }
